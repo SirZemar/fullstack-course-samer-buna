@@ -1,6 +1,17 @@
+import { useEffect, useState } from "react";
+// Components
 import ContestPreview from "./contest-preview";
+// API
+import { fetchContests } from "../api-client";
 
-const ContestList = ({ contests }) => {
+const ContestList = ({ initialContests }) => {
+	const [contests, setContests] = useState(initialContests);
+
+	useEffect(() => {
+		// fetchContests().then((contests) => {
+		// 	setContests(contests);
+		// });
+	}, []);
 	return (
 		<div className="contest-list">
 			{contests.map((contest) => {

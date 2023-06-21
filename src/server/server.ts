@@ -3,6 +3,7 @@ import os from "os";
 
 import config from "./config";
 import apiRouter from "./api-router";
+import serverRender from "./render";
 
 const server = express();
 
@@ -12,9 +13,11 @@ server.set("View engine", "ejs");
 
 server.use("/api", apiRouter);
 
-server.get("/", (req, res) => {
+server.get("/", async (req, res) => {
+	const { initialMarkup, initialData } = await serverRender();
 	res.render("index.ejs", {
-		initialContent: "Loading...",
+		initialMarkup,
+		initialData,
 	});
 });
 
