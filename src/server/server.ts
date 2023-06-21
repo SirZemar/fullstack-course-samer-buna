@@ -2,6 +2,7 @@ import express from "express";
 import os from "os";
 
 import config from "./config";
+import apiRouter from "./api-router";
 
 const server = express();
 
@@ -9,7 +10,9 @@ server.use(express.static("dist"));
 
 server.set("View engine", "ejs");
 
-server.use("/", (req, res) => {
+server.use("/api", apiRouter);
+
+server.get("/", (req, res) => {
 	res.render("index.ejs", {
 		initialContent: "Loading...",
 	});
