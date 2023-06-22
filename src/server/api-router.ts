@@ -3,8 +3,6 @@ import cors from "cors";
 
 import { connectClient } from "./db";
 
-// import testData from "../test-data.json";
-
 const router = express.Router();
 
 router.use(cors());
@@ -30,9 +28,9 @@ router.get("/contest/:contestId", async (req, res) => {
 
 	const contest = await client
 		.collection("contests")
-		.find({ id: req.params.contestId });
+		.findOne({ id: req.params.contestId });
 
-	req.send({ contest });
+	res.send({ contest });
 });
 
 export default router;
